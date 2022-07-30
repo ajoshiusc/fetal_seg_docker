@@ -1,8 +1,8 @@
-FROM continuumio/miniconda
+FROM continuumio/miniconda3
 
 MAINTAINER ajoshiusc
 
-RUN pip nilearn install numpy SimpleITK
+RUN pip install numpy SimpleITK
 
 ADD python/src /feta_seg
 
