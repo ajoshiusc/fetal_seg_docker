@@ -15,6 +15,7 @@ from networks.vit_seg_modeling import CONFIGS as CONFIGS_ViT_seg
 import SimpleITK as sitk
 import h5py
 import uuid
+import glob
 
 
 def inference(input_nii, model, output_fname=None, do_bfc=True, device='cpu'):
@@ -40,7 +41,16 @@ def inference(input_nii, model, output_fname=None, do_bfc=True, device='cpu'):
 
 if __name__ == "__main__":
 
-    device = 'cuda'
+
+    input_img_dir = '/input_img'
+    input_meta_dir = '/input_meta'
+    outputDir = '/output'
+
+    T2wImagePath = glob.glob(os.path.join(input_img_dir, 'anat', '*_T2w.nii.gz'))[0]
+    sub = os.path.split(T2wImagePath)[1].split('_')[0] # to split the input directory and to obtain the suject name
+
+
+    device = 'cpu'
 
     seed = 1234
     vit_name = 'R50-ViT-B_16'
@@ -54,8 +64,8 @@ if __name__ == "__main__":
     snapshot = './epoch_66.pth'
     # snapshot = '/home1/ajoshi/epoch_10.pth'
 
-    input_nii = '/deneb_disk/feta_2022/test/sub-026/anat/sub-026_rec-mial_T2w.nii.gz'
-    output_file = '/deneb_disk/feta_2022/test/sub-026/anat/sub-026_rec-mial_T2w66.label.nii.gz'
+    input_nii = T2wImagePath #'/deneb_disk/feta_2022/test/sub-026/anat/sub-026_rec-mial_T2w.nii.gz'
+    output_file = os.path.join(outputDir, sub + '_seg_result.nii.gz') #'/deneb_disk/feta_2022/test/sub-026/anat/sub-026_rec-mial_T2w66.label.nii.gz'
     #input_nii = '/deneb_disk/feta_2022/test/lowfield/outSVR2_fixed_reorient.nii.gz'
     #output_file = '/deneb_disk/feta_2022/test/lowfield/outSVR2_fixed_reorient.label.nii.gz'
 
