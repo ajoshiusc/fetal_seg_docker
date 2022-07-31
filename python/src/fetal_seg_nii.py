@@ -9,11 +9,10 @@ import torch.backends.cudnn as cudnn
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from utils import test_images, test_single_nii
+from utils import test_single_nii
 from networks.vit_seg_modeling import VisionTransformer as ViT_seg
 from networks.vit_seg_modeling import CONFIGS as CONFIGS_ViT_seg
 import SimpleITK as sitk
-import h5py
 import uuid
 import glob
 
@@ -61,7 +60,7 @@ if __name__ == "__main__":
     vit_patches_size = 16
     #snapshot = '/project/ajoshi_27/code_farm/brainseg/model/T1_SkullScalp_t1256/TU_R50-ViT-B_16_skip3_30k_epo150_bs16_256/epoch_10.pth'
     # snapshot = '/project/ajoshi_27/code_farm/brainseg/model/T1T2_SkullScalp_t1t2256/TU_R50-ViT-B_16_skip3_30k_epo150_bs16_256/epoch_10.pth' #os.path.join(snapshot_path, 'best_model.pth')
-    snapshot = './epoch_66.pth'
+    snapshot = '/trained_model/epoch_66.pth'
     # snapshot = '/home1/ajoshi/epoch_10.pth'
 
     input_nii = T2wImagePath #'/deneb_disk/feta_2022/test/sub-026/anat/sub-026_rec-mial_T2w.nii.gz'
