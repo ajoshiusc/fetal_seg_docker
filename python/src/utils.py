@@ -119,7 +119,7 @@ def test_single_volume(image, label, net, classes, patch_size=[256, 256], test_s
     return metric_list
 
 
-def test_single_nii(nii_fname, net, patch_size=[256, 256], output_fname='prediction.nii.gz'):
+def test_single_nii(nii_fname, net, patch_size=[256, 256], output_fname='prediction.nii.gz',device='cpu'):
 
     image = load_img(nii_fname).get_fdata()
 
@@ -134,7 +134,7 @@ def test_single_nii(nii_fname, net, patch_size=[256, 256], output_fname='predict
                 slice = zoom(
                     slice, (patch_size[0] / x, patch_size[1] / y), order=3)
             input = torch.from_numpy(slice).unsqueeze(
-                0).unsqueeze(0).float() #.cuda()
+                0).unsqueeze(0).float().to(device) #.cuda()
             net.eval()
             with torch.no_grad():
                 outputs = net(input)

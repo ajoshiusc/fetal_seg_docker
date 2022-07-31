@@ -17,8 +17,7 @@ import h5py
 import uuid
 
 
-
-def inference(input_nii, model, output_fname=None, do_bfc=True):
+def inference(input_nii, model, output_fname=None, do_bfc=True, device='cpu'):
     model.eval()
 
     # run N4 bias field correction
@@ -33,26 +32,25 @@ def inference(input_nii, model, output_fname=None, do_bfc=True):
     else:
         sitk.WriteImage(inputImage, nii_filename)
 
-
-    test_single_nii(nii_filename, net, patch_size=[256, 256], output_fname=output_fname)
+    test_single_nii(nii_filename, net, patch_size=[
+                    256, 256], output_fname=output_fname, device=device)
 
     os.remove(nii_filename)
 
 
-
 if __name__ == "__main__":
 
-    device='cpu'
+    device = 'cuda'
 
     seed = 1234
-    vit_name='R50-ViT-B_16'
+    vit_name = 'R50-ViT-B_16'
     num_classes = 8
     is_pretrain = True
     n_skip = 3
     img_size = 256
-    vit_patches_size = 16    
+    vit_patches_size = 16
     #snapshot = '/project/ajoshi_27/code_farm/brainseg/model/T1_SkullScalp_t1256/TU_R50-ViT-B_16_skip3_30k_epo150_bs16_256/epoch_10.pth'
-    #snapshot = '/project/ajoshi_27/code_farm/brainseg/model/T1T2_SkullScalp_t1t2256/TU_R50-ViT-B_16_skip3_30k_epo150_bs16_256/epoch_10.pth' #os.path.join(snapshot_path, 'best_model.pth')
+    # snapshot = '/project/ajoshi_27/code_farm/brainseg/model/T1T2_SkullScalp_t1t2256/TU_R50-ViT-B_16_skip3_30k_epo150_bs16_256/epoch_10.pth' #os.path.join(snapshot_path, 'best_model.pth')
     snapshot = '/home/ajoshi/epoch_66.pth'
     # snapshot = '/home1/ajoshi/epoch_10.pth'
 
@@ -66,24 +64,20 @@ if __name__ == "__main__":
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    #torch.cuda.manual_seed(args.seed)
-
-
-
+    # torch.cuda.manual_seed(args.seed)
 
     config_vit = CONFIGS_ViT_seg[vit_name]
     config_vit.n_classes = num_classes
     config_vit.n_skip = n_skip
     config_vit.patches.size = (vit_patches_size, vit_patches_size)
-    if vit_name.find('R50') !=-1:
-        config_vit.patches.grid = (int(img_size/vit_patches_size), int(img_size/vit_patches_size))
-    net = ViT_seg(config_vit, img_size=img_size, num_classes=config_vit.n_classes) #.cuda()
+    if vit_name.find('R50') != -1:
+        config_vit.patches.grid = (
+            int(img_size/vit_patches_size), int(img_size/vit_patches_size))
+    net = ViT_seg(config_vit, img_size=img_size,
+                  num_classes=config_vit.n_classes).to(device)  # .cuda()
 
+    net.load_state_dict(torch.load(
+        snapshot, map_location=torch.device(device)))
 
-    net.load_state_dict(torch.load(snapshot,map_location=torch.device(device)))
-
-
-    inference(input_nii, net, output_fname=output_file, do_bfc=False)
-
-
-
+    inference(input_nii, net, output_fname=output_file,
+              do_bfc=False, device=device)
