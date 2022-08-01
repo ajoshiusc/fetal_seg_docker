@@ -58,5 +58,10 @@ You will see a slidebar showing the slices of 3d image being processed. It shoul
 docker cp keen_fermat:/output <local_output_dir>
 ``` 
 
-Now you can inspect the files in the output directory.
+Now you can inspect the files in the output directory `<local_output_dir>`.
 
+7. Clean up:
+```docker
+docker stop [CONTAINER-ID]
+docker rm -v [CONTAINER-ID]
+```
