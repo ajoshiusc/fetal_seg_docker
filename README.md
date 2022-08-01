@@ -37,6 +37,5 @@ You will see a slidebar showing the slices of 3d image being processed.
 = Download and Run the Docker Image
 Download the Docker Image docker load feta_challenge_ajoshiusc_ver0.tar.gz
 
-
 Load the docker image docker load <feta_challenge_ajoshiusc_ver0.tar.gz
 
