@@ -24,7 +24,7 @@ docker save feta_challenge/ajoshiusc:latest|gzip>feta_challenge_ajoshiusc_ver1.t
 
 2. Load the docker image docker 
 ```docker
-load <feta_challenge_ajoshiusc_ver1.tar.gz
+docker load <feta_challenge_ajoshiusc_ver1.tar.gz
 ```
 
 3. Run the docker image to make it into container:
