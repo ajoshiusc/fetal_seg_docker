@@ -1,6 +1,6 @@
 # fetal_seg_docker
 This repository has code for creating a docker container for fetal brain segmentation as part of feta 2022 challenge.
-[https://feta.grand-challenge.org/]
+https://feta.grand-challenge.org/
 
 Here are the steps for building docker image from the data.
 
