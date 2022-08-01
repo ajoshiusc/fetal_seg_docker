@@ -62,6 +62,6 @@ Now you can inspect the files in the output directory `<local_output_dir>`.
 
 7. Clean up:
 ```docker
-docker stop [CONTAINER-ID]
-docker rm -v [CONTAINER-ID]
+docker stop <container name>
+docker rm -v <container name>
 ```
