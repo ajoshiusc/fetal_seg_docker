@@ -90,3 +90,6 @@ if __name__ == "__main__":
 
     inference(input_nii, net, output_fname=output_file,
               do_bfc=False, device=device)
+
+    print('Segmentation done for ' + input_nii)
+    print('The output is saved in ' + output_file)
