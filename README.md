@@ -1,4 +1,6 @@
 # fetal_seg_docker
+This repository has code for creating a docker container for fetal brain segmentation as part of feta 2022 challenge.
+[https://feta.grand-challenge.org/]
 
 Here are the steps for building docker image from the data.
 
@@ -32,6 +34,9 @@ You will see a slidebar showing the slices of 3d image being processed.
 
 6. Copy the output from the container to an output 
 
+
+7. Save docker image to tar.gz file
+docker save feta_challenge/ajoshiusc:latest|gzip>feta_challenge_ajoshiusc_ver0.tar.gz
 
 
 = Download and Run the Docker Image
