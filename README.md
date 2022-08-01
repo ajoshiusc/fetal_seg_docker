@@ -10,7 +10,7 @@ Here are the steps for building docker image from the data.
 
 3. Open terminal and cd fetal_seg_docker directory. Type
 ```docker
-docker build . -t feta_challenge/ajoshiusc`
+docker build . -t feta_challenge/ajoshiusc
 ```
 This will build a docker image
 
