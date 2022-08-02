@@ -1,5 +1,5 @@
-# fetal_seg_docker
-This repository has code for creating a docker container for fetal brain segmentation as part of [feta 2022 challenge](https://feta.grand-challenge.org/).
+# Docker submission for Feta 2022 competition: fetal_seg_docker
+This repository has code for creating a docker container for fetal brain segmentation as part of [feta 2022 challenge](https://feta.grand-challenge.org/). This is only the code for running trained model on a test data. The entire code is available at [brainseg](https://github.com/ajoshiusc/brainseg) inside `feta_2022` subdirectory. 
 
 Here are the steps for building docker image from the data.
 
