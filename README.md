@@ -37,9 +37,9 @@ e.g.
 ```
 Check the name of the running container using `docker ps`.
 
-4. The docker assumes that the fetal image that you want to segment is in 
-`<subdir>/anat/sub-026_rec-mial_T2w.nii.gz`.
-For reference, the corresponding lines of code is as follows:
+4. The docker assumes that the fetal image that you want to segment is with the path 
+`<input_dir>/anat/<subname>_T2w.nii.gz`.
+For reference, the corresponding lines of code are as follows:
 ```python
     T2wImagePath = glob.glob(os.path.join(input_img_dir, 'anat', '*_T2w.nii.gz'))[0]
     sub = os.path.split(T2wImagePath)[1].split('_')[0] # to split the input directory and to obtain the suject name
@@ -55,7 +55,7 @@ You will see a slidebar showing the slices of 3d image being processed. It shoul
 
 6. Copy the output from the container to an output directory using the command
 ```docker 
-docker cp keen_fermat:/output <local_output_dir>
+docker cp <container_name>:/output <local_output_dir>
 ``` 
 
 Now you can inspect the files in the output directory `<local_output_dir>`.
