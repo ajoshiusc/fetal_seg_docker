@@ -1,6 +1,6 @@
 FROM continuumio/miniconda3
 
-MAINTAINER ajoshiusc
+LABEL maintainer="ajoshiusc"
 
 RUN pip install numpy SimpleITK nilearn torch ml_collections
 
