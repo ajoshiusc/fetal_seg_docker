@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 feta_challenge_ajoshiusc_ver1.tar.gz
+trained_model/epoch_66.pth
